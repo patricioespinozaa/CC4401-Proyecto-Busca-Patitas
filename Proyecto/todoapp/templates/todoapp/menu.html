@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Aquí va el título de cada página --> 
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Diseño para menú desplegable -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Carga la carpeta static y el css del diseño-->
+    <style>
+        /* Usado en perfil_usuario.html para el boton de "Cerrar Sesión" */
+        .custom-button-logout {
+            display: block;                
+            width: 200px !important;       
+            margin: 0 auto !important;     
+            padding: 10px 20px !important; 
+            font-size: 20px !important;    
+            background-color: #007bff !important;  
+            color: #fff !important;        
+            border: none !important;       
+            border-radius: 4px !important; 
+            border-color: #007bff !important;
+            text-align: center !important; 
+        }
+        /* Usado en menu.html para la navbar */
+        .custom-dropdown-toggle {
+            background-color: gray !important;
+            color: white !important;
+            border: none !important;
+        }
+        /* Modifica el color de fondo de la navbar */
+        .navbar-custom {
+            background-color:  rgba(174, 200, 180, 1);
+            opacity: 1;
+        }
+    </style>
+    {% load static %} 
+    <link rel="stylesheet" type="text/css" href="{% static '/todoapp/desing_style.css' %}">
+</head>
+<body>
+    <!--NavBar tiene: Logo|Busca Patitas(a la izquierda) y 2 botones(a la derecha)-->
+    <nav class="navbar navbar-light navbar-custom">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'todoapp/img/logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">    
+            Busca Patitas
+        </a>
+        
+        <!-- Botones Home, Crear Publicación y Perfil-->
+        <form class="form-inline">
+            <!--Boton Home: Redirecciona a la pagina principal-->
+            <a href="{% url 'home' %}" class="btn btn-primary mr-2">Home</a>
+            {% if user.is_authenticated %}
+                <!-- Botón Crear Publicación: Solo visible para usuarios autenticados -->
+                <a href="{% url 'ficha_animal' %}" class="btn btn-success mr-2">Crear Publicación</a>
+                <!-- Menú desplegable para usuarios autenticados: Permite acceder a "Ver mi perfil" y "Cerrar Sesión" -->
+                <div class="dropdown">
+                    <button class="btn custom-dropdown-toggle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Perfil
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'perfil_usuario' %}">Ver mi perfil</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
+                    </div>
+                </div>                
+            {% else %}
+                <!-- Menú desplegable para usuarios no autenticados: Permite acceder a Iniciar Sesión y Registrarse -->
+                <div class="dropdown">
+                    <button class="btn custom-dropdown-toggle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Perfil
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'register_user' %}">Registrarse</a>
+                        <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </nav>
+
+    <!-- Aquí va el contenido principal de cada página -->
+    <main>{% block content %}{% endblock %}</main>
+
+    <!-- Scripts JavaScript para menú desplegable-->
+    {% block scripts %}
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
+</body>
+</html>
+

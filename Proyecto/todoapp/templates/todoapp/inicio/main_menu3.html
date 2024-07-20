@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principal</title>
+    {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static '/todoapp/desing_style.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+        <style>
+            /* Usado en perfil_usuario.html para el boton de "Cerrar Sesión" */
+            .custom-button-logout {
+                display: block;                
+                width: 200px !important;       
+                margin: 0 auto !important;     
+                padding: 10px 20px !important; 
+                font-size: 20px !important;    
+                background-color: #007bff !important;  
+                color: #fff !important;        
+                border: none !important;       
+                border-radius: 4px !important; 
+                border-color: #007bff !important;
+                text-align: center !important; 
+            }
+            /* Usado en menu.html para la navbar */
+            .custom-dropdown-toggle {
+                background-color: gray !important;
+                color: white !important;
+                border: none !important;
+            }
+            /* Modifica el color de fondo de la navbar */
+            .navbar-custom {
+                background-color:  rgba(174, 200, 180, 1);
+                opacity: 1;
+            }
+        </style>
+</head>
+
+<body>
+    <!--NavBar tiene: Logo|Busca Patitas(a la izquierda) y 2 botones(a la derecha)-->
+    <nav class="navbar navbar-light navbar-custom">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'todoapp/img/logo.jpg' %}" width="30" height="30" class="d-inline-block align-top" alt="">    
+            Busca Patitas
+        </a>
+        
+        <!-- Botones Home y Perfil-->
+        <form class="form-inline">
+            <!--Boton Home: Redirecciona a la pagina principal-->
+            <a href="http://127.0.0.1:8000/inicio" class="btn btn-primary mr-2">Home</a>
+            <!--Boton Perfil: Permite redireccionar a "Iniciar Sesion" o "Registrarse"-->
+            {% if user.is_authenticated %}
+                <!-- Menú desplegable para usuarios autenticados: Permite acceder a "Ver mi perfil" y "Cerrar Sesion" -->
+                <div class="dropdown">
+                    <button class="btn custom-dropdown-toggle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Perfil
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'perfil_usuario' %}">Ver mi perfil</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
+                    </div>
+                </div>                
+            {% else %}
+                <!-- Menú desplegable para usuarios no autenticados: Permite acceder a Iniciar Sesión y Registrarse -->
+                <div class="dropdown">
+                    <button class="btn custom-dropdown-toggle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Perfil
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'register_user' %}">Registrarse</a>
+                        <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesión</a>
+                    </div>
+                </div>
+            {% endif %}
+        </form>
+    </nav>
+
+    <br>
+
+    <!-- Aquí va el contenido principal de cada página -->
+    <main>{% block content %}
+        <!--Barra de Busqueda-->
+        <div class="container">
+            <div class="content">
+                <div class="input-group">
+
+                    <!--Boton Buscar a la izquierda pegado al buscador-->
+                    <button class="btn btn-outline-secondary rounded" type="button">Buscar</button>
+
+                    <!--Buscador-->
+                    <input type="text" class="form-control rounded" placeholder="Escribe tu búsqueda aquí" aria-label="Búsqueda" aria-describedby="button-addon">
+                </div>          
+            </div>
+        </div>
+        
+        <br>
+        <br>
+
+        <!--Sección que representa 3 publicaciones de la pagina principal, input son solo lectura-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class=" p-3 border">
+                        {% csrf_token %}
+                        <form action="{{ url_post1}}">
+                            <!--Boton para visualizar publicacion, es el titulo o nombre del mishi-->
+                            <button name = "animal1" type = "submit" value = {{id1}} class="custom-border btn btn-secondary button_form_animal">
+                                {{nombre1}}
+                            </button>
+                        </form>
+                        <br>
+
+                        <!--Imagen del Mishi(Se debe sacar usando sql, no este src directo)-->
+                        <div class="position-relative text-center">
+                            <img src="{% static 'todoapp/img/mishi_design_test.jpg' %}" alt="Imagen 1" class="img-fluid img_post_size">
+                        </div>
+                        <br>
+
+                        <!--Fecha Extravio: Fecha-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Fecha Extravío:</p>
+
+                            <!--Input Fecha Extravio(Se debe sacar usando sql, no este src directo)-->
+                            <div class="fecha_extravio_input">
+                                <input type="text" class="form-control fecha_extravio" id="" name="" readonly placeholder="Fecha" 
+                                value="{{fecha_extravio1}}, {{hora_extravio1}}">
+                            </div>
+                        </div>
+
+                        <!--Ubicación Extravio: Ubicación-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Ubicación Extravío:</p>
+
+                            <!--Input Ubicacion Extravio(Se debe sacar usando sql, no este src directo)-->
+                            <div class="ubicación_extravio_input">
+                                <input type="text" class="form-control" id="" name="" readonly placeholder="Ubicación" 
+                                value="{{ubicacion_extravio1}}">
+                            </div>
+                        </div>
+
+                        <!--Color: color-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Color:</p>
+
+                            <!--Input Color(Se debe sacar usando sql, no este src directo)-->
+                            <div class="color_input">
+                                <input type="text" class="form-control" id="" name="" readonly placeholder="Color" 
+                                value="No implementado">
+                            </div>
+                        </div>
+
+                        <!--Descripcion: descripcion-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Descripción:</p>
+
+                            <!--Input Descripcion(Se debe sacar usando sql, no este src directo)-->
+                            <div class="description_input">
+                                <textarea class="large_input" placeholder="Texto grande" readonly value="">
+                                    {{descripcion1}}
+                                </textarea>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <!--Mishi 2 y 3 son lo mismo que mishi 1-->
+                <div class="col-sm-4">
+                    <div class=" p-3 border">
+                        {% csrf_token %}
+                        <form action="{{ url_post2}}">
+                            <!--Boton para visualizar publicacion, es el titulo o nombre del mishi-->
+                            <button name = "animal2" type = "submit" value = {{id2}} class="custom-border btn btn-secondary button_form_animal">
+                                {{nombre2}}
+                            </button>
+                        </form>
+                        <br>
+
+                        <!--Imagen del Mishi(Se debe sacar usando sql, no este src directo)-->
+                        <div class="position-relative text-center">
+                            <img src="{% static 'todoapp/img/mishi_design_test.jpg' %}" alt="Imagen 1" class="img-fluid img_post_size">
+                        </div>
+                        <br>
+
+                        <!--Fecha Extravio: Fecha-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Fecha Extravío:</p>
+
+                            <!--Input Fecha Extravio(Se debe sacar usando sql, no este src directo)-->
+                            <div class="fecha_extravio_input">
+                                <input type="text" class="form-control fecha_extravio" id="" name="" readonly placeholder="Fecha" 
+                                value="{{fecha_extravio2}}, {{hora_extravio2}}">
+                            </div>
+                        </div>
+
+                        <!--Ubicación Extravio: Ubicación-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Ubicación Extravío:</p>
+
+                            <!--Input Ubicacion Extravio(Se debe sacar usando sql, no este src directo)-->
+                            <div class="ubicación_extravio_input">
+                                <input type="text" class="form-control" id="" name="" readonly placeholder="Ubicación" 
+                                value="{{ubicacion_extravio2}}">
+                            </div>
+                        </div>
+
+                        <!--Color: color-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Color:</p>
+
+                            <!--Input Color(Se debe sacar usando sql, no este src directo)-->
+                            <div class="color_input">
+                                <input type="text" class="form-control" id="" name="" readonly placeholder="Color" 
+                                value="No implementado">
+                            </div>
+                        </div>
+
+                        <!--Descripcion: descripcion-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Descripción:</p>
+
+                            <!--Input Descripcion(Se debe sacar usando sql, no este src directo)-->
+                            <div class="description_input">
+                                <textarea class="large_input" placeholder="Texto grande" readonly value="">
+                                    {{descripcion2}}
+                                </textarea>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class=" p-3 border">
+                        {% csrf_token %}
+                        <form action="{{ url_post3}}">
+                            <!--Boton para visualizar publicacion, es el titulo o nombre del mishi-->
+                            <button name = "animal3" type = "submit" value = {{id3}} class="custom-border btn btn-secondary button_form_animal">
+                                {{nombre3}}
+                            </button>
+                        </form>
+                        <br>
+
+                        <!--Imagen del Mishi(Se debe sacar usando sql, no este src directo)-->
+                        <div class="position-relative text-center">
+                            <img src="{% static 'todoapp/img/mishi_design_test.jpg' %}" alt="Imagen 1" class="img-fluid img_post_size">
+                        </div>
+                        <br>
+
+                        <!--Fecha Extravio: Fecha-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Fecha Extravío:</p>
+
+                            <!--Input Fecha Extravio(Se debe sacar usando sql, no este src directo)-->
+                            <div class="fecha_extravio_input">
+                                <input type="text" class="form-control fecha_extravio" id="" name="" readonly placeholder="Fecha" 
+                                value="{{fecha_extravio3}}, {{hora_extravio3}}">
+                            </div>
+                        </div>
+
+                        <!--Ubicación Extravio: Ubicación-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Ubicación Extravío:</p>
+
+                            <!--Input Ubicacion Extravio(Se debe sacar usando sql, no este src directo)-->
+                            <div class="ubicación_extravio_input">
+                                <input type="text" class="form-control" id="" name="" readonly placeholder="Ubicación" 
+                                value="{{ubicacion_extravio3}}">
+                            </div>
+                        </div>
+
+                        <!--Color: color-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Color:</p>
+
+                            <!--Input Color(Se debe sacar usando sql, no este src directo)-->
+                            <div class="color_input">
+                                <input type="text" class="form-control" id="" name="" readonly placeholder="Color" 
+                                value="No implementado">
+                            </div>
+                        </div>
+
+                        <!--Descripcion: descripcion-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Descripción:</p>
+
+                            <!--Input Descripcion(Se debe sacar usando sql, no este src directo)-->
+                            <div class="description_input">
+                                <textarea class="large_input" placeholder="Texto grande" readonly value="">
+                                    {{descripcion3}}
+                                </textarea>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}</main>
+
+    <!-- Scripts JavaScript para menú desplegable-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
+    <br>
+</body>
+</html>

@@ -1,0 +1,30 @@
+[
+{
+    "model": "categorias.categoria",
+    "pk": 1,
+    "fields": {
+        "nombre": "Lenguajes"
+    }
+},
+{
+    "model": "categorias.categoria",
+    "pk": 2,
+    "fields": {
+        "nombre": "Ingeniería de software"
+    }
+},
+{
+    "model": "categorias.categoria",
+    "pk": 3,
+    "fields": {
+        "nombre": "Arquitectura"
+    }
+},
+{
+    "model": "categorias.categoria",
+    "pk": 4,
+    "fields": {
+        "nombre": "Sistemas operativos"
+    }
+}
+]

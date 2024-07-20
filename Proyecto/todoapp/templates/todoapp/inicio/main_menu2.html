@@ -1,0 +1,185 @@
+{% extends 'todoapp/menu.html' %}
+{% load static %}
+
+{% block title %} Inicio {% endblock %}
+
+{%block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principal</title>
+    {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static '/todoapp/desing_style.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <br>
+    
+    <!--Barra de Busqueda-->
+    <div class="container">
+        <div class="content">
+            <div class="input-group">
+
+                <!--Boton Buscar a la izquierda pegado al buscador-->
+                <button class="btn btn-outline-secondary rounded" type="button">Buscar</button>
+
+                <!--Buscador-->
+                <input type="text" class="form-control rounded" placeholder="Escribe tu búsqueda aquí" aria-label="Búsqueda" aria-describedby="button-addon">
+            </div>          
+        </div>
+    </div>
+    
+    <br>
+    <br>
+
+    <!--Sección que representa 3 publicaciones de la pagina principal, input son solo lectura-->
+    <div class="container">
+        <div class="row" id="results-container">
+            <div class="col-sm-4" data-mascota-id="{{ id1 }}">
+                <div class=" p-3 border animal-card">
+                    {% csrf_token %}
+                    <a href="post/{{url_post1}}" class="btn btn-success" formaction="">
+
+                        <label class="custom-border" style="color: green;">
+                            {{nombre1 }}
+                        </label>
+                        <br>
+
+                        <!--Imagen del Mishi(Se debe sacar usando sql, no este src directo)-->
+                        <div class="position-relative text-center">
+                            <img src="{% static 'todoapp/img/mishi_design_test.jpg' %}" alt="Imagen 1" class="img-fluid img_post_size">
+                        </div>
+                        <br>
+
+                        <!--Fecha Extravio: Fecha-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Fecha Extravío:</p>
+
+                            <!--Input Fecha Extravio(Se debe sacar usando sql, no este src directo)-->
+                            <div class="fecha_extravio_input">
+                                <input type="text" class="form-control fecha_extravio" id="" name="" readonly placeholder="Fecha" 
+                                value="{{fecha_extravio1}}, {{hora_extravio1}}">
+                            </div>
+                        </div>
+
+                        <!--Ubicación Extravio: Ubicación-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Ubicación Extravío:</p>
+
+                            <!--Input Ubicacion Extravio(Se debe sacar usando sql, no este src directo)-->
+                            <div class="ubicación_extravio_input">
+                                <input type="text" class="form-control" id="" name="" readonly placeholder="Ubicación" 
+                                value="{{ubicacion_extravio1}}">
+                            </div>
+                        </div>
+
+                        <!--Color: color-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Color:</p>
+
+                            <!--Input Color(Se debe sacar usando sql, no este src directo)-->
+                            <div class="color_input">
+                                <input type="text" class="form-control" id="" name="" readonly placeholder="Color" 
+                                value="No implementado">
+                            </div>
+                        </div>
+
+                        <!--Descripcion: descripcion-->
+                        <div class="d-flex justify-content-between mt-2 form_aling_input">
+                            <p>Descripción:</p>
+
+                            <!--Input Descripcion(Se debe sacar usando sql, no este src directo)-->
+                            <div class="description_input">
+                                <textarea class="large_input" placeholder="Texto grande" readonly value="">
+                                    {{descripcion1}}
+                                </textarea>
+                            </div> 
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!--Mishi 2 y 3 son lo mismo que mishi 1-->
+            <div class="col-sm-4">
+                <div class=" p-3 border">
+                    {% csrf_token %}
+                    <form action="{{ url_post2}}">
+                        <!--Boton para visualizar publicacion, es el titulo o nombre del mishi-->
+                        <button name = "animal2" type = "submit" value = {{id2}} class="custom-border btn btn-secondary button_form_animal">
+                            {{nombre2}}
+                        </button>
+                    </form>
+                    <br>
+
+                    <!--Imagen del Mishi(Se debe sacar usando sql, no este src directo)-->
+                    <div class="position-relative text-center">
+                        <img src="{% static 'todoapp/img/mishi_design_test.jpg' %}" alt="Imagen 1" class="img-fluid img_post_size">
+                    </div>
+                    <br>
+
+                    <!--Fecha Extravio: Fecha-->
+                    <div class="d-flex justify-content-between mt-2 form_aling_input">
+                        <p>Fecha Extravío:</p>
+
+                        <!--Input Fecha Extravio(Se debe sacar usando sql, no este src directo)-->
+                        <div class="fecha_extravio_input">
+                            <input type="text" class="form-control fecha_extravio" id="" name="" readonly placeholder="Fecha" 
+                            value="{{fecha_extravio2}}, {{hora_extravio2}}">
+                        </div>
+                    </div>
+
+                    <!--Ubicación Extravio: Ubicación-->
+                    <div class="d-flex justify-content-between mt-2 form_aling_input">
+                        <p>Ubicación Extravío:</p>
+
+                        <!--Input Ubicacion Extravio(Se debe sacar usando sql, no este src directo)-->
+                        <div class="ubicación_extravio_input">
+                            <input type="text" class="form-control" id="" name="" readonly placeholder="Ubicación" 
+                            value="{{ubicacion_extravio2}}">
+                        </div>
+                    </div>
+
+                    <!--Color: color-->
+                    <div class="d-flex justify-content-between mt-2 form_aling_input">
+                        <p>Color:</p>
+
+                        <!--Input Color(Se debe sacar usando sql, no este src directo)-->
+                        <div class="color_input">
+                            <input type="text" class="form-control" id="" name="" readonly placeholder="Color" 
+                            value="No implementado">
+                        </div>
+                    </div>
+
+                    <!--Descripcion: descripcion-->
+                    <div class="d-flex justify-content-between mt-2 form_aling_input">
+                        <p>Descripción:</p>
+
+                        <!--Input Descripcion(Se debe sacar usando sql, no este src directo)-->
+                        <div class="description_input">
+                            <textarea class="large_input" placeholder="Texto grande" readonly value="">
+                                {{descripcion2}}
+                            </textarea>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                  <!-- imagen
+                    <div class="position-relative text-center">
+
+                    </div>
+                    <br>
+                    -->
+                    <!-- fecha extravio-->
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'todoapp/menu.html' %}
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<!--Nombre y Logo inicio sesión o registro-->
+<div class="box">
+    <div class="container">
+        <div>
+            <!--Titulo Compañia-->
+            <h1 class = "lr_title">
+                Busca Patitas
+            </h1>
+            <!---Logo en grande-->
+            <div class="div_lr_logo">
+                <img class = "lr_logo" src="{% static 'todoapp/img/logo.jpg' %}" alt="Logo de Busca Patitas">  
+            </div>
+        </div>
+
+        <!-- Mensajes de error -->
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!---Formulario de Inicio de Sesión-->
+        <form method="post">
+            {% csrf_token %}
+            <!-- Correo electrónico -->
+            <div class="div_lr_input d-flex justify-content-between mt-2">
+                <label for="email" class="lr_label">Correo:</label>
+                <input type="text" class="form-control lr_input" id="email" name="email" placeholder="Correo electrónico" required>
+                <i class="bx bx-user"></i>
+            </div>
+            <!-- Contraseña -->
+            <div class="div_lr_input d-flex justify-content-between mt-2">
+                <label for="contraseña" class="lr_label">Contraseña:</label>
+                <input type="password" class="form-control lr_input" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+                <i class="bx bx-lock-alt"></i>
+            </div>
+            <!---Boton para enviar información de Inicio de Sesión -->
+            <br>
+            <button type="submit" value="Iniciar Sesión" class="btn btn-primary btn-lg d-block mx-auto form-group">Iniciar Sesión</button>
+
+            <!--Enlace para redigir al formulario de registro -->
+            <p class = "text-center">Si no tienes una cuenta, 
+                <a href="{% url 'register_user' %}" class = "register_here">regístrate aquí</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,73 @@
+{% extends 'todoapp/menu.html' %}
+{% load static %}
+
+{% block title %} Inicio {% endblock %}
+
+{%block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class = 'container'>
+        <div class="text-center p-3 border animal-card">
+            <h5>{{nombre}}</h5>
+            <!--imagen-->   
+        <hr>
+            <div class = "position-relative text-center">
+                <img src = {{foto1}}  class = "img-fluid">
+                <!-- <img src = {{foto1}} -->
+            </div>
+        </hr>
+            <!--Fecha extravio-->
+            <div class="d-flex justify-content-between mt-2 form_aling_input">
+                <p>Fecha Extravío:</p>
+                <div class="text">
+                    <p>{{fecha_extravio}}, {{hora_extravio}}</p>
+                </div>
+            </div>
+                <!--Ubicación Extravio: Ubicación-->
+            <div class="d-flex justify-content-between mt-2 form_aling_input">
+                <p>Ubicación Extravío:</p>
+                <div class="ubicación_extravio_input">
+                    <p>{{ubicacion_extravio}}</p>
+                </div>
+            </div>
+            <!--Color-->
+            <div class="d-flex justify-content-between mt-2 form_aling_input">
+                <p>Color:</p>
+                <p>{{color}}</p>
+            </div>
+            <!--Chip-->
+            <div class="d-flex justify-content-between mt-2 form_aling_input">
+                <p>Tiene Chip:</p>
+
+                <!--Input Color(Se debe sacar usando sql, no este src directo)-->
+                <div class="tiene_chip">
+                    <input type="text" class="form-control text-center" id="" name="" readonly placeholder="Chip" 
+                    value="{{tiene_chip}}">
+                </div>
+            </div>
+            <!--Desscripcion-->
+            <div class="d-flex justify-content-between mt-2 form_aling_input">
+                <p>Descripción:</p>
+
+                <!--Input Descripcion(Se debe sacar usando sql, no este src directo)-->
+                <div class="description_input">
+                    <textarea class="large_input" placeholder="Texto grande" readonly value="" style=" overflow: hidden; text-overflow: clip; white-space: pre-wrap;">
+                        {{ descripcion }}
+                    </textarea>
+                </div> 
+            </div>
+            </ul>
+        </div>
+     </div>
+</body>
+</html>
+
+{% endblock %}

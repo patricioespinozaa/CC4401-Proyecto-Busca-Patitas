@@ -1,0 +1,391 @@
+/*
+Colores
+*/
+:root {
+    /* CSS HEX */
+    --white: #fcfcfcff;
+    --ash-gray: #aec8b4ff;
+    --shamrock-green: #439655ff;
+    --dartmouth-green: #005a14ff;
+    --pakistan-green: #00430fff;
+
+    /* CSS HSL */
+    --white: hsla(0, 0%, 99%, 1);
+    --ash-gray: hsla(134, 19%, 73%, 1);
+    --shamrock-green: hsla(133, 38%, 43%, 1);
+    --dartmouth-green: hsla(133, 100%, 18%, 1);
+    --pakistan-green: hsla(133, 100%, 13%, 1);
+
+    /* SCSS RGB */
+    --white: rgba(252, 252, 252, 1);
+    --ash-gray: rgba(174, 200, 180, 1);
+    --shamrock-green: rgba(67, 150, 85, 1);
+    --dartmouth-green: rgba(0, 90, 20, 1);
+    --pakistan-green: rgba(0, 67, 15, 1);
+
+    /*CSS Gradient */
+    --gradient-top: linear-gradient(0deg, #fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+    --gradient-right: linear-gradient(90deg, #fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+    --gradient-bottom: linear-gradient(180deg, #fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+    --gradient-left: linear-gradient(270deg, #fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+    --gradient-top-right: linear-gradient(45deg, #fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+    --gradient-bottom-right: linear-gradient(135deg, #fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+    --gradient-top-left: linear-gradient(225deg, #fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+    --gradient-bottom-left: linear-gradient(315deg, #fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+    --gradient-radial: radial-gradient(#fcfcfcff, #aec8b4ff, #439655ff, #005a14ff, #00430fff);
+
+    /*Fuente(letra)*/
+    --verdana: 'Verdana' . sans-serif;
+}
+
+/*Se aplica a todos los body creados en los archivos html que incluyan este css*/
+body{
+    /*Tipo de letra para todo el contenido de las paginas.*/
+    font-family: var(--verdana);
+}
+
+/*Titulo login y/o register usuario*/
+.lr_title{
+    /*Color letra*/
+    color: var(--dartmouth-green);
+
+    /*tamaño letra*/
+    font-size: 50px;
+
+    /*Alineado al centro de la pagina*/
+    text-align: center;
+
+    /*Margin entre el techo de la pag y el contenido*/
+    margin-top: 100px;
+}
+
+/*div Logo login y register usuario*/
+.div_lr_logo{
+    /*Dimensionamos tamaño imagen*/
+
+    /*imagen centrada*/
+    text-align: center;
+    position: relative;
+        top: -10px;
+}
+
+/*Logo login y register usuario*/
+.lr_logo{
+    /*Tamaño de la imagen*/
+    width: 140px;
+    height: 140px;
+}
+
+/*Especifica diseño para un label de login/register*/
+.lr_label{
+    /*Fija el ancho del label*/
+    width: 100px;
+
+    /*Se alinea el texto a la derecha*/
+    text-align: right;
+}
+
+/*Especifica diseño para el input de un label de login/register*/
+.lr_input{
+    /*Fija el ancho del input*/
+    /*!important: prioridad por sobre otro cambio*/
+    width: 350px !important;
+}
+
+/*Especifica diseño para el div que contiene al input de login/register*/
+.div_lr_input{
+    /*Fija el ancho total de dnode estará el input*/
+    width: 500px;
+
+    /*Estos 2 elementos sirven para centrar el div*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*Fondo de los titulos principales de la pagina*/
+.background_title1{
+    /*Color de fondo*/
+    background-color: var(--shamrock-green);
+
+    /*Tamaño(altura) de la barra de color berde*/
+    height: 80px;
+
+    /*Deja el texto centrado verticalmente*/
+    display: flex; 
+    align-items: center;
+
+    /*Contenido separado en extremos*/
+    justify-content: space-between;
+}
+
+/*Clase que se utiliza para el fondo de otro titulo, el que es acompañado de un boton volver atras*/
+.background_title2{
+    /*Centramos el texto que va a contener esta clase(hijos)*/
+    text-align: center;
+
+    /*Creamos un borde de 2 pixeles de color verde oscuro*/
+    border: 2px solid var(--pakistan-green);
+
+    /* Color de fondo del cuadro de texto */
+    background-color: var(--shamrock-green);
+
+    /* Bordes redondeados */
+    border-radius: 8px;
+
+    /* Espacio interno dentro del cuadro */
+    padding: 10px;
+
+    /*Color del texto*/
+    color: var(--white);
+}
+
+/*Se usa para los textos usados como titulos grandes*/
+.title{
+    /*Color de la letra*/
+    color: var(--white);
+
+    /*Tamaño letra*/
+    font-size: 30px;
+
+    /*margen de la izquierda*/
+    margin-left: 25px;
+}
+
+/*Boton nueva publicación en titulo*/
+.title_button{
+    /*Separa el boton del lado derecho de la imagen*/
+    margin-right: 28px;
+
+    /*Tamaño letra*/
+    font-size: 23px;
+
+    /*Determina la dimensión de bloques de area(div) */
+    line-height: 20px;
+}
+
+/*Se utiliza para otro tipo de titulos*/
+.title_2{
+    /*Deja un margen a la izquierda*/
+    /*Debe cambiarse, objetivo es centrar texto*/
+    margin-left: 200px;
+}
+
+/*Todos las clases con un borde tendran esto, la idea es que sea usado para cualquier elemento que quiera tener botdes redondeados*/
+.custom_rounded{
+    /*Redondea las esquinas usando un radio especificado*/
+    border-radius: 8px;
+}
+
+/*Diseño que es usado para dejar los botones para ver publicaciones sobre la imagen de la mascota*/
+.custom-border {
+    /*Fijamos posicion absoluta, asi podemos moverlo libremente*/
+    position: absolute;
+
+    /*Dejamos top -20 para que baje un poco y left 50% para que quede "centrado"*/
+    top: -20px;
+    left: 50%;
+
+    /*Movemos en el eje X un 50% hacia la izquierda*/
+    transform: translateX(-50%);
+
+    /*Color de fondo del boton(Mishi)*/
+    background-color: lightgray;
+
+    /*Creamos borde con prioridad(!important), por que bootstrap usa btn/btn-primary/btn-secondary, los cuales siempre se aplicaban*/
+    border: 2px solid var(--pakistan-green) !important;
+
+    /* Espacio interno dentro del cuadro */
+    padding: 5px 20px;
+
+    /*Espacio entre el texto y los bordes del boton*/
+    border-radius: 10px;
+    color: var(--pakistan-green);
+}
+
+/*Boton login/register*/
+.lr_button{
+    /*Tamaño del botón*/
+    size: 50px;
+}
+
+/*Pinta y subraya texto, registrate aqui*/
+.register_here{
+    /*Subraya texto*/
+    text-decoration: underline; 
+
+    /*Cambia color letra*/
+    color: skyblue;
+}
+
+/*Clase para fijar el tamaño de la imagen en la pagina principal*/
+.img_post_size {
+    width: 200px !important;
+    height: auto !important;
+}
+
+/* Estilos para los inputs */
+.form-control {
+    /* Hacemos que todos los inputs ocupen el ancho total del contenedor */
+    width: 60% !important;
+}
+
+/* Alineación a la izquierda para los elementos dentro de div_lr_input */
+.form_aling_input{
+    /*Alinea a la izquierda los childs*/
+    text-align: left;
+}
+
+/*Clase para diseño del input fecha extravio en pag principal*/
+.fecha_extravio_input{
+    /*Personalizamos cada input de este lugar por que tienen diferentes anchos*/
+    width: 75px;
+}
+
+/*Clase para diseño del input  ubicacion extravio en pag principal*/
+.ubicación_extravio_input{
+    /*Personalizamos cada input de este lugar por que tienen diferentes anchos*/
+    width: 140px;
+}
+
+/*Clase para diseño del input color en pag principal*/
+.color_input{
+    /*Personalizamos cada input de este lugar por que tienen diferentes anchos*/
+    width: 90px;
+}
+
+/*Diseño para los textarea, input de descripción en pag principal*/
+.large_input{
+    /*Fijamos ancho y largo del cuador de texto(input)*/
+    width: 200px;
+    height: 200px;
+
+    /* Mantiene los espacios y saltos de línea */
+    white-space: pre-wrap;
+}
+
+/*Clase para el diseño del boton que abrirá cada pag o ficha de mascota*/
+.button_form_animal{
+    /*Solo fijamos el color del texto*/
+    color: var(--pakistan-green);
+}
+
+/*Clase para el div del boton volver atras*/
+.div_left_button{
+    /*Fijamos tamaño en 100 con prioridad*/
+    width: 100px !important;
+
+    /*Dejamos un margen para separar el boton del titulo Mishi 1*/
+    margin-left: 40px;
+}
+
+@media (min-width: 576px) { /* Estilos para dispositivos de al menos 576px de ancho (Bootstrap sm breakpoint) */
+    .col-sm-8 {
+        flex: 0 0 90%; /* Ocupa el 80% del ancho total */
+        max-width: 90%; /* Establece un ancho máximo del 80% */
+    }
+
+    .col-sm-4 {
+        flex: 0 0 10%; /* Ocupa el 20% del ancho total */
+        max-width: 10%; /* Establece un ancho máximo del 20% */
+    }
+}
+
+/*Estilo para todos los elementos tipo <textarea>*/
+textarea{
+    /*Estos elementos son escalables por el usuario, esto fija esa función desabilitada*/
+    resize: none !important;
+}
+
+/*Estilo para dejar la posición de un elemento flexible a cambios*/
+.d-flex{
+    display: flex;
+}
+
+/*Estilo para crear un boton con forma de triangulo*/
+.triangle-button{
+    /*Color del fondo del boton*/
+    background-color: var(--shamrock-green);
+
+    /*Borde del boton(cuadro)*/
+    border: 2px solid var(--pakistan-green);
+    padding: 10px 20px;
+
+    /*Propiedad que sirve para hacer cambios en el boton*/
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/*Si el elemento que tenga la clase triangle-button tiene el cursor encima*/
+.triangle-button:hover {
+    /*El elemento se escala para verse más grande*/
+    transform: scale(1.1);
+
+    /*El elemento genera una sombra que lo hace "subir"*/
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/*Si el elemento dejo de tener el cursor encima*/
+.triangle-button:before {
+
+    /*En resumen, ayuda a dejar el boton como estaba*/
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent var(--white);
+}
+
+/* Contenedor de Formulario */
+.card {
+
+    background-color: #aec8b4ff; /* Color de fondo de la caja */
+    border: 1px solid #aec8b4ff; /* Borde */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto de elevación */
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 2px solid var(--pakistan-green);
+    border-top: none;
+}
+
+/* Mostrar contenido de la pestaña activa */
+#atributos {
+    position: absolute;
+    z-index: 999;
+    display: block;
+}
+
+.sub-atributo{
+    background-color: lightgray;
+    padding: 10px;
+    text-align: center;
+}
+
+.input-group{
+    display: grid;
+     /* Crea 6 columnas equidistantes */
+    gap: 10px; /* Espacio entre las columnas */
+    z-index: 999 ;
+}
+
+.filter-button{
+    margin-right: 10px !important;
+
+}
+
+.filter-input{
+    width: 40px;
+    text-align: center;
+}
+
+.pet_name{
+    color: var(--pakistan-green) !important;
+}
+
+.btn_p{
+    background-color: var(--pakistan-green) !important;
+}

@@ -1,0 +1,58 @@
+{% extends 'todoapp/menu.html' %}
+{% load static %}
+
+{% block title %} Registro {% endblock %}
+{% block content %}
+<div class="box">
+    <div class="container">
+        <div>
+            <!--Titulo Compañia-->
+            <h1 class = "lr_title">
+                Busca Patitas
+            </h1>
+            <!---Logo en grande-->
+            <div class="div_lr_logo">
+                <img class = "lr_logo" src="{% static 'todoapp/img/logo.jpg' %}" alt="Logo de Busca Patitas">  
+            </div>
+        </div>
+
+        <!-- Mensajes de error -->
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Formulario de registro -->
+        <form method="post">
+            {% csrf_token %}
+            <!-- Nombre: -->
+            <div class="div_lr_input d-flex justify-content-between mt-2">
+                <label for="nombre_usuario">Nombre</label>
+                <input type="text" class="form-control lr_input" id=nombre_usuario name="nombre" required>
+            </div>
+            <!-- Correo electrónico: -->
+            <div class="div_lr_input d-flex justify-content-between mt-2">
+                <label for="mail">Correo electrónico</label>
+                <input type="email" class="form-control lr_input" id="mail" name="mail" required>
+            </div>
+            <!-- Contraseña: -->
+            <div class="div_lr_input d-flex justify-content-between mt-2">
+                <label for="contraseña">Contraseña</label>
+                <input type="password" class="form-control lr_input" id="contraseña" name="contraseña" required>
+            </div>
+            <!-- Confirmar contraseña: -->
+            <div class="div_lr_input d-flex justify-content-between mt-2">
+                <label for="confirm_contraseña">Confirmar Contraseña</label>
+                <input type="password" class="form-control lr_input" id="confirm_contraseña" name="confirm_contraseña" required>
+            </div>
+            <!-- Botoón para enviar información de registro -->
+            <button type="submit" value="Registrarse" class="btn btn-primary btn-lg d-block mx-auto form-group">Registrarse</button>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

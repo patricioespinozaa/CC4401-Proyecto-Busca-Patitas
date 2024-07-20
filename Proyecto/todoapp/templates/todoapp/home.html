@@ -1,0 +1,316 @@
+{% extends 'todoapp/menu.html' %}
+{% load static %}
+
+{% block title %} Inicio {% endblock %}
+
+{% block content %}
+<br>
+<!-- Barra de Búsqueda -->
+<div class="container">
+    <div class="content">
+        <form id="search-form" method="get" action="{% url 'home' %}">
+            <div class="" style="width: 1100px;">
+                <div class="row">
+                    <button class="btn btn-primary " type="submit">Buscar</button>
+                    <input type="text" name="q" id="search-bar" class="form-control rounded" placeholder="Escribe tu búsqueda aquí" aria-label="Búsqueda" aria-describedby="button-addon" value="{{ request.GET.q }}">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <!-- Filtro por especie-->
+                    <label for="especie">Especie</label>
+                    <select name="especie" id="especie" class="form-control">
+                        <option value="" id="m_todas" name ="m_todas">Mostrar todas</option>
+                        {% for especie, razas in especie_raza.items %}
+                            <option value="{{ especie }}" {% if request.GET.especie == especie %}selected{% endif %}>{{ especie }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <!-- Filtro por raza, depende de la especie seleccionada -->
+                    <label for="raza">Raza</label>
+                    <select name="raza" id="raza" class="form-control">
+                        <option value="" id="m_todas" name ="m_todas">Mostrar todas</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <!-- Filtro por color de la mascota -->
+                    <label for="color">Color</label>
+                    <select name="color" id="color" class="form-control">
+                        <option value="" id="m_todas" name ="m_todas">Mostrar todas</option>
+                        <option value="Negro" {% if request.GET.color == 'Negro' %}selected{% endif %}>Negro</option>
+                        <option value="Blanco" {% if request.GET.color == 'Blanco' %}selected{% endif %}>Blanco</option>
+                        <option value="Marrón" {% if request.GET.color == 'Marrón' %}selected{% endif %}>Marrón</option>
+                        <option value="Gris" {% if request.GET.color == 'Gris' %}selected{% endif %}>Gris</option>
+                        <option value="Atigrado" {% if request.GET.color == 'Atigrado' %}selected{% endif %}>Atigrado</option>
+                        <option value="Beige" {% if request.GET.color == 'Beige' %}selected{% endif %}>Beige</option>
+                        <option value="Naranja" {% if request.GET.color == 'Naranja' %}selected{% endif %}>Naranja</option>
+                        <option value="Manchado" {% if request.GET.color == 'Manchado' %}selected{% endif %}>Manchado</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <!-- Filtro por region donde se perdio la mascota-->
+                    <label for="region">Region</label>
+                    <select name="region" id="region" class="form-control">
+                        <option value="" id="m_todas" name ="m_todas">Mostrar todas</option>
+                        {% for region in REGIONES%}
+                            <option value="{{ region }}" {% if request.GET.region == region %}selected{% endif %}>{{ region }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <!-- Filtro por comuna, esto depende de la region seleccionada-->
+                    <label for="comuna">Comuna</label>
+                    <select name="comuna" id="comuna" class="form-control">
+                        <option value="" id="m_todas" name ="m_todas">Mostrar todas</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <!-- Filtro por chip, si es que tiene uno o no la mascota -->
+                    <label for="tiene_chip">¿Tiene chip?</label>
+                    <select name="tiene_chip" id="tiene_chip" class="form-control">
+                        <option value="" id="m_todas" name ="m_todas">Mostrar todas</option>
+                        <option value="true" {% if request.GET.tiene_chip == 'true' %}selected{% endif %}>Sí</option>
+                        <option value="false" {% if request.GET.tiene_chip == 'false' %}selected{% endif %}>No</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Boton para resetear filtros-->
+            <button type="reset" class="btn btn-danger mt-2" name="reset_filter" id="reset_filter"> Revertir Cambios</button>
+            <!-- Boton que aplica filtros -->
+            <button type="" class="btn btn-primary mt-2">Aplicar filtros</button>
+        </form>
+    </div>
+</div>
+
+<br><br>
+
+<!-- Sección que representa las publicaciones de la página principal -->
+<div class="container">
+    <div class="row" id="results-container">
+        {% for mascota in mascotas %}
+        <a href="post/{{mascota.id}}" class="btn btn-outline-success" formaction="" style="color: black;">
+            <div class="p-3" data-mascota-id="{{ mascota.id }}">
+                <div class="animal-card">
+                    <h5>{{ mascota.nombre }}</h5>
+                    <hr>
+                    <div class="justify-content-center">
+                        {% if mascota.fotos.exists %}
+                            <img src="{{ mascota.fotos.first.archivo.url }}" alt="{{ mascota.nombre }}" class=" img_post_size">
+                        {% else %}
+                            <img src="{% static 'todoapp/img/placeholder.png' %}" alt="Sin imagen" class="img-fluid img-thumbnail img_post_size">
+                        {% endif %}
+                    </div>
+                    <hr>
+                    <ul class="list-unstyled">
+                        <li class="d-flex justify-content-between">
+                            <strong style="background-color: rgba(174, 200, 180, 1); text-align: left;">
+                                Fecha de extravío:
+                            </strong>
+                            <span>{{ mascota.fecha_extravio|date:"d/m/Y" }}</span>
+                        </li>
+                        <li class="d-flex justify-content-between">
+                            <strong style="background-color: rgba(174, 200, 180, 1); text-align: left; height: max-content;">
+                                Ubicación de extravío:
+                            </strong>
+                            <span style="width: 150px; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: clip; height: max-content;">
+                                {{ mascota.ubicacion_extravio }}
+                            </span>
+                        </li>
+                        <li class="d-flex justify-content-between">
+                            <strong style="background-color: rgba(174, 200, 180, 1); text-align: left; height: max-content;">
+                                Color:
+                            </strong>
+                            <span>{{ mascota.color }}</span>
+                        </li>
+                        <li class="d-flex justify-content-between">
+                            <strong style="background-color: rgba(174, 200, 180, 1); text-align: left; height: max-content;">
+                                Raza:
+                            </strong>
+                            <span>{{ mascota.raza }}</span>
+                        </li>
+                        <li class="d-flex justify-content-between">
+                            <strong style="background-color: rgba(174, 200, 180, 1); text-align: left; height: max-content;">
+                                Tiene chip:
+                            </strong>
+                            <span>{% if mascota.tiene_chip %}Sí{% else %}No{% endif %}</span>
+                        </li>
+                        <li class="d-flex justify-content-between">
+                            <strong style="background-color: rgba(174, 200, 180, 1); text-align: left; height: max-content;">
+                                Descripción:
+                            </strong>
+                            <span style="width: 200px; text-align: right; overflow: hidden; text-overflow: clip; white-space: pre-wrap;">{{ mascota.descripcion }}</span>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </a>
+
+        {% endfor %}
+    </div>
+    <div id="loader" class="text-center" style="display: none;">
+        Cargando más mascotas...
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    var page = 1;
+    var loading = false;
+    var endOfResults = false;
+    var especie_raza = {
+        'Perro': ['Labrador Retriever', 'Golden Retriever', 'Pastor Alemán', 'Bulldog Francés', 'Bulldog Inglés', 'Chihuahua', 'Boxer', 'Dálmata', 'Poodle', 'Pug', 'Quiltro'],
+        'Gato': ['Siamés', 'Persa', 'Maine Coon', 'Bengalí', 'Ragdoll', 'British Shorthair', 'Sphynx', 'Abisinio', 'Birmano', 'American Shorthair', 'Gato mestizo'],
+        'Ave': ['Canario', 'Periquito', 'Cacatúa', 'Cotorra', 'Periquito Australiano', 'Diamante Mandarín', 'Agapornis', 'Calafate'],
+        'Reptil': ['Gecko leopardo', 'Iguana verde', 'Tortuga de orejas rojas', 'Dragón barbudo', 'Tortuga rusa', 'Python real', 'Boa constrictor', 'Gecko crestado', 'Tortuga mediterránea', 'Tortuga de tierra'],
+        'Roedor': ['Cobaya', 'Hámster', 'Rata doméstica', 'Conejo', 'Chinche degú', 'Jerbo', 'Cuyo', 'Ratón doméstico', 'Criceto', 'Cuyo de pelo largo']
+    };
+
+    //No se si es un error o es mi computador, utilizar JSON.parse({{COMUNAS | safe}}) arroja un error y no carga las comunas, no cambiar
+    var COMUNAS = {{ COMUNAS | safe }};
+
+    document.getElementById('reset_filter').addEventListener('click', function(){
+
+        document.getElementById('especie').value = '';
+        document.getElementById('raza').value = '';
+        document.getElementById('color').value = '';
+        document.getElementById('tiene_chip').value = '';
+        document.getElementById('region').value = '';
+        document.getElementById('comuna').value = '';
+
+        document.getElementById('m_todas').setAttribute('selected', true);
+        updateRazas();
+        updateComunas();
+    });
+
+    function updateRazas() {
+        var especieSeleccionada = $('#especie').val();
+        var razaSeleccionada = '{{ request.GET.raza }}';
+        var $raza = $('#raza');
+
+        $raza.empty();
+        $raza.append('<option value="" id="m_todas" name ="m_todas">Mostrar todas</option>');
+
+        if (especieSeleccionada && especie_raza[especieSeleccionada]) {
+            especie_raza[especieSeleccionada].forEach(function(raza) {
+                var selected = raza === razaSeleccionada ? ' selected' : '';
+                $raza.append('<option value="' + raza + '"' + selected + '>' + raza + '</option>');
+            });
+        }
+    }
+
+    function updateComunas(){
+        var regionSelected = $('#region').val();
+        var comunaSelected = '{{ request.GET.comuna }}';
+        var $comuna = $('#comuna');
+
+        $comuna.empty();
+        $comuna.append('<option value = "" id="m_todas" name ="m_todas"> Mostrar todas</option>');
+
+        if(regionSelected && COMUNAS[regionSelected]){
+            COMUNAS[regionSelected].forEach(function(comuna){
+                var selected = comuna === comunaSelected ? ' selected ': '';
+                $comuna.append('<option value="' + comuna + '"' + selected + '>' + comuna + '</option>');
+            });
+        }
+    }
+
+    updateRazas();
+    updateComunas();
+
+    $('#especie').change(function() {
+        updateRazas();
+    });
+
+    $('#region').change(function(){
+        updateComunas();
+    });
+
+    function loadMoreMascotas() {
+        if (loading || endOfResults) return;
+        loading = true;
+
+        var query = $('#search-bar').val();
+        var especie = $('#especie').val();
+        var color = $('#color').val();
+        var raza = $('#raza').val();
+        var tiene_chip = $('#tiene_chip').val();
+        var region = $('#region').val();
+        var comuna = $('#comuna').val();
+
+        $('#loader').show();
+
+        $.ajax({
+            url: '{% url "home" %}',
+            data: {
+                'q': query,
+                'especie': especie,
+                'color': color,
+                'raza': raza,
+                'tiene_chip': tiene_chip,
+                'region': region,
+                'comuna': comuna,
+                'page': page
+            },
+            dataType: 'json',
+            success: function(data) {
+                $('#loader').hide();
+                if (data.mascotas.length > 0) {
+                    var existingIds = [];
+                    $('#results-container').find('.col-sm-4').each(function() {
+                        existingIds.push($(this).data('mascota-id'));
+                    });
+
+                    for (var i = 0; i < data.mascotas.length; i++) {
+                        var mascota = data.mascotas[i];
+                        if (existingIds.indexOf(mascota.id) === -1) {
+                            var mascotaHTML = 
+                            '<a href="post/{{mascota.id}}" class="btn btn-outline-success btn-lg" formaction="" style="color: black;">'+
+                                '<div class="p-3" data-mascota-id="' + mascota.id + '">' +
+                                    '<div class="animal-card">' +
+                                        '<h5>' + mascota.nombre + '</h5>' +
+                                        '<hr>' +
+                                        '<div class="justify-content-center">' +
+                                            '<img src="' + mascota.foto_url + '" alt="' + mascota.nombre + '" class="img-fluid img-thumbnail">' +
+                                        '</div>' +
+                                        '<hr>' +
+                                        '<ul class="list-unstyled">' +
+                                            '<li class="fd-flex justify-content-between"><strong  style="background-color: rgba(174, 200, 180, 1); text-align: left;">Fecha de extravío:</strong><span> ' + mascota.fecha_extravio + '</span></li>' +
+                                            '<li class="fd-flex justify-content-between"><strong  style="background-color: rgba(174, 200, 180, 1); text-align: left;">Fecha de extravío:</strong>Ubicación de extravío:</strong><span style="width: 150px; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: clip; height: max-content;"> ' + mascota.ubicacion_extravio + '</span</li>' +
+                                            '<li class="fd-flex justify-content-between"><strong  style="background-color: rgba(174, 200, 180, 1); text-align: left;">Fecha de extravío:</strong>Color:</strong><span> ' + mascota.color + '</span</li>' +
+                                            '<li class="fd-flex justify-content-between"><strong  style="background-color: rgba(174, 200, 180, 1); text-align: left;">Fecha de extravío:</strong>Raza:</strong><span> ' + (mascota.raza || 'Desconocida') + '</span</li>' +
+                                            '<li class="fd-flex justify-content-between"><strong  style="background-color: rgba(174, 200, 180, 1); text-align: left;">Fecha de extravío:</strong>Tiene chip:</strong><span> ' + (mascota.tiene_chip ? 'Sí' : 'No') + '</span</li>' +
+                                            '<li class="fd-flex justify-content-between"><strong  style="background-color: rgba(174, 200, 180, 1); text-align: left;">Fecha de extravío:</strong>Descripción:</strong><span style="width: 200px; text-align: right; overflow: hidden; text-overflow: clip; white-space: pre-wrap;"> ' + mascota.descripcion + '</span</li>' +
+                                        '</ul>' +
+                                    '</div>' +
+                                '</div>'+
+                            '</a>' ;
+                            $('#results-container').append(mascotaHTML);
+                        }
+                    }
+                    page++;
+                } else {
+                    endOfResults = true;
+                }
+                loading = false;
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cargar más mascotas:', error);
+                $('#loader').hide();
+                loading = false;
+            }
+        });
+    }
+
+    $('#search-bar').on('input', function() {
+        page = 1;
+        endOfResults = false;
+        $('#results-container').empty();
+        loadMoreMascotas();
+    });
+});
+</script>
+{% endblock %}

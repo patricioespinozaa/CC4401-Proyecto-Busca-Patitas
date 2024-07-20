@@ -1,0 +1,48 @@
+{% extends 'todoapp/menu.html' %}
+{% load static %}
+
+{% block title %} Inicio {% endblock %}
+
+{%block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principal</title>
+    {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static '/todoapp/desing_style.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <br>
+    
+    <!--Barra de Busqueda-->
+    <div class="container">
+        <div class="content">
+            <div class="input-group">
+
+                <!--Boton Buscar a la izquierda pegado al buscador-->
+                <button class="btn btn-outline-secondary rounded" type="button">Buscar</button>
+
+                <!--Buscador-->
+                <input type="text" class="form-control rounded" placeholder="Escribe tu búsqueda aquí" aria-label="Búsqueda" aria-describedby="button-addon">
+            </div>          
+        </div>
+    </div>
+                  <!-- imagen
+                    <div class="position-relative text-center">
+
+                    </div>
+                    <br>
+                    -->
+                    <!-- fecha extravio-->
+</body>
+</html>
+
+{% endblock %}
