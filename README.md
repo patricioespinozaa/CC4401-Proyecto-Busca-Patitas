@@ -10,10 +10,16 @@
 - Saad M'Hamdi
 
 # Problemática a tratar:
-Se ha observado que cuando se pierden mascotas, sus dueños recurren principalmente a la ayuda de otras personas a través de redes sociales y afiches en el sector para encontrarlas. Al recorrer distintos sectores de Santiago, es común ver numerosos afiches, así como publicaciones en grupos de Facebook, perfiles de Instagram dedicados a mascotas perdidas y en la aplicación SOSAFE.
-
-El problema radica en la gran cantidad de animales perdidos y la dispersión de la información necesaria para su rescate (número de teléfono, nombre del animal, características físicas, instrucciones sobre qué hacer al encontrarlo, etc.). Esta dispersión dificulta la rápida identificación y el contacto con los dueños.
-
-Como solución, se propone desarrollar un producto mínimo viable (MVP) en forma de una aplicación web que permita a las personas ingresar datos sobre sus mascotas perdidas, incluyendo toda la información relevante, para que otros usuarios puedan verificar rápidamente si han encontrado a una mascota perdida y contactar a sus dueños.
-
-El sistema debería ser accesible desde dispositivos móviles para que los usuarios puedan consultarlo en tiempo real al encontrar un posible animal perdido. Al inicio, la aplicación debería mostrar varias imágenes de animales perdidos y permitir filtrar rápidamente por características generales (sector de búsqueda, especie del animal, color) para facilitar una identificación rápida y eficaz.
+> La problem´atica que se decidi´o abordar trata de las mascotas perdidas. Cuando una mascota se
+ pierde, el objetivo principal de quien seria el due˜ no o encargado es encontrarla, sin embargo, esta
+ tarea puede resultar muy complicada sin pistas o ayuda de terceros. Es por este motivo, que se
+ suele recurrir a la ayuda de otras personas, ya sea a trav´es de redes sociales y/o afiches en el sector
+ donde se perdi´o dicha mascota. Estos hechos se pueden observar en todo el pa´ ıs, particularmente,
+ en Santiago, lo m´as com´ un es ver numerosos afiches, publicaciones en grupos de Facebook y perfiles
+ de Instagram que se dedican a b´ usqueda y rastreo de estos animales, de forma paralela a todo lo
+ mencionado anteriormente, existe una plataforma que busca ayudar en esta causa, que es SOSAFE.
+ Para abordar este problema, se propone como soluci´on un software enfocado en la informaci´on
+ de las mascotas perdidas. Aqu´ ıse detallar´a todo lo realizado para facilitar la b´ usqueda de mascotas,
+ explicando las tareas y los puntos importantes del proyecto, junto con las tareas asignadas y los
+ detalles del trabajo de cada una. Asimismo, se mencionar´an las metas alcanzadas, destacando tanto
+ los aspectos positivos como los negativos del proceso de desarrollo.
